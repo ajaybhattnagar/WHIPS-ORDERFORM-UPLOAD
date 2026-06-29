@@ -1,0 +1,17 @@
+
+{
+
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_secure": true,
+    "smtp_user": "noreply.visuify@gmail.com",
+    "smtp_password": "bulz ycvh wsek lzzq",
+
+    "ORDER_FORM_PATH": "C:\\Users\\Ajay\\Desktop\\APPS\\OrderFormUpload\\API\\ORDER_FORMS",
+
+    "postgress_host": "18.221.243.107",
+    "postgress_port": 5432,
+    "postgress_user": "postgres",
+    "postgress_password": "Ajay.22774284",
+    "postgress_database": "whips"
+}
