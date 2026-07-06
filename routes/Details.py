@@ -9,6 +9,8 @@ import random
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import psycopg2
+from pathlib import Path
+from werkzeug.utils import secure_filename
 
 import smtplib
 from email.mime.text import MIMEText
@@ -184,11 +186,14 @@ def upload_excel():
         if not file:
             return {"message": "No file uploaded"}, 400
 
-        folder_path = os.path.join(os.getcwd(), "ORDER_FORMS")
-        os.makedirs(folder_path, exist_ok=True)
+        BASE_DIR = Path(__file__).resolve().parent
+        folder_path = BASE_DIR / "ORDER_FORMS"
+        folder_path.mkdir(parents=True, exist_ok=True)
 
-        file_path = os.path.join(folder_path, file.filename)
-        file.save(file_path)
+        filename = secure_filename(file.filename)
+        file_path = folder_path / filename
+
+        file.save(str(file_path))
 
         # optional fields safely
         notes = request.form.get("notes")
@@ -202,12 +207,12 @@ def upload_excel():
         # Send email with the file attached
         send_email_order_form(email=email, customer_id=customer_id, ship_to_name=ship_to_name, attachments=[file_path])
 
-        try:
-            notes_json = simplejson.loads(notes)
-            notes_df = pd.DataFrame.from_dict(notes_json, orient='index')
-            notes_df.to_csv(os.path.join(folder_path, "NOTES.csv"))
-        except Exception:
-            pass  # keep raw notes if not JSON
+        # try:
+        #     notes_json = simplejson.loads(notes)
+        #     notes_df = pd.DataFrame.from_dict(notes_json, orient='index')
+        #     notes_df.to_csv(os.path.join(folder_path, "NOTES.csv"))
+        # except Exception:
+        #     pass  # keep raw notes if not JSON
 
         order_number = ''.join(random.choices('0123456789', k=6))
 
