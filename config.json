@@ -13,5 +13,11 @@
     "postgress_port": 5432,
     "postgress_user": "postgres",
     "postgress_password": "Ajay.22774284",
-    "postgress_database": "whips"
+    "postgress_database": "whips", 
+
+    "mysql_host": "whips-mysql.cd2usw0085ns.us-east-2.rds.amazonaws.com",
+    "mysql_port": 3306,
+    "mysql_user": "admin",
+    "mysql_password": "Ajay.22774284",  
+    "mysql_database": "WHIPS_ORDER_FORM"
 }
