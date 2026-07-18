@@ -111,6 +111,11 @@ def send_email_order_form(email, customer_id, ship_to_name, attachments=[]):
 
     except Exception as e:
         print(str(e))
+        # close the server connection if it was opened
+        try:
+            server.quit()
+        except:
+            pass
         return False
 
 def send_email_link_for_order_form(email, link, po_number=None):
@@ -195,6 +200,11 @@ def send_email_link_for_order_form(email, link, po_number=None):
 
     except Exception as e:
         print(str(e))
+         # close the server connection if it was opened
+        try:
+            server.quit()
+        except:
+            pass
         return False
 
 @details_blueprint.route("/api/v1/price_list", methods=['GET'])
